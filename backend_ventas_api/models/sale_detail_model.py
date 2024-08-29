@@ -11,7 +11,7 @@ def get_product_model():
 class SaleDetail(models.Model):
     id_product = models.ForeignKey(get_product_model(), on_delete=models.CASCADE, related_name='sale_details')
     quantity = models.IntegerField()
-     
+         
     class Meta:
         db_table = 'sale_details'
 

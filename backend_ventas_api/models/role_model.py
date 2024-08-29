@@ -9,6 +9,6 @@ class Role(models.Model):
     # users = models.ManyToManyField('User', through='UserRole', related_name='roles')
 
     def __str__(self):
-        return self.nombre_rol
+        return self.name_rol
     class Meta:
         db_table = 'role'

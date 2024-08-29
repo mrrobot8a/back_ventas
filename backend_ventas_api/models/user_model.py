@@ -10,6 +10,6 @@ class User(models.Model):
     # roles = models.ManyToManyField('Role', through='UserRole', related_name='users')
 
     def __str__(self):
-        return self.nombre_usuario
+        return self.name_user
     class Meta:
         db_table = 'user'

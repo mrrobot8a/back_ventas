@@ -543,7 +543,7 @@
         "kind": 6,
         "importPath": "backend_ventas_api.models.role_model",
         "description": "backend_ventas_api.models.role_model",
-        "peekOfCode": "class Role(models.Model):\n    id_rol = models.AutoField(primary_key=True)\n    name_rol = models.CharField(max_length=50, unique=True)\n    description  = models.TextField(blank=True, null=True)\n    creation_date = models.DateTimeField(auto_now_add=True)\n    # users = models.ManyToManyField('User', through='UserRole', related_name='roles')\n    def __str__(self):\n        return self.nombre_rol\n    class Meta:\n        db_table = 'role'",
+        "peekOfCode": "class Role(models.Model):\n    id_rol = models.AutoField(primary_key=True)\n    name_rol = models.CharField(max_length=50, unique=True)\n    description  = models.TextField(blank=True, null=True)\n    creation_date = models.DateTimeField(auto_now_add=True)\n    # users = models.ManyToManyField('User', through='UserRole', related_name='roles')\n    def __str__(self):\n        return self.name_rol\n    class Meta:\n        db_table = 'role'",
         "detail": "backend_ventas_api.models.role_model",
         "documentation": {}
     },
@@ -624,7 +624,7 @@
         "kind": 6,
         "importPath": "backend_ventas_api.models.user_model",
         "description": "backend_ventas_api.models.user_model",
-        "peekOfCode": "class User(models.Model):\n    id_usuario = models.AutoField(primary_key=True)\n    name_user = models.CharField(max_length=50, unique=True)\n    password = models.CharField(max_length=255)\n    email = models.EmailField(max_length=50, unique=True)\n    creation_date = models.DateTimeField(auto_now_add=True)\n    # roles = models.ManyToManyField('Role', through='UserRole', related_name='users')\n    def __str__(self):\n        return self.nombre_usuario\n    class Meta:",
+        "peekOfCode": "class User(models.Model):\n    id_usuario = models.AutoField(primary_key=True)\n    name_user = models.CharField(max_length=50, unique=True)\n    password = models.CharField(max_length=255)\n    email = models.EmailField(max_length=50, unique=True)\n    creation_date = models.DateTimeField(auto_now_add=True)\n    # roles = models.ManyToManyField('Role', through='UserRole', related_name='users')\n    def __str__(self):\n        return self.name_user\n    class Meta:",
         "detail": "backend_ventas_api.models.user_model",
         "documentation": {}
     },
