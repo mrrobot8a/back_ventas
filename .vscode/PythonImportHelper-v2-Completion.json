@@ -114,22 +114,6 @@
         "documentation": {}
     },
     {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
-        "isExtraImport": true,
-        "detail": "django.db",
-        "documentation": {}
-    },
-    {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
-        "isExtraImport": true,
-        "detail": "django.db",
-        "documentation": {}
-    },
-    {
         "label": "models",
         "importPath": "django.db",
         "description": "django.db",
@@ -525,15 +509,6 @@
         "description": "backend_ventas_api.migrations.0001_initial",
         "peekOfCode": "class Migration(migrations.Migration):\n    initial = True\n    dependencies = [\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='DocumentType',\n            fields=[\n                ('id', models.AutoField(primary_key=True, serialize=False)),\n                ('name', models.CharField(max_length=50)),",
         "detail": "backend_ventas_api.migrations.0001_initial",
-        "documentation": {}
-    },
-    {
-        "label": "Migration",
-        "kind": 6,
-        "importPath": "backend_ventas_api.migrations.0002_sale_supplier_product_saledetail",
-        "description": "backend_ventas_api.migrations.0002_sale_supplier_product_saledetail",
-        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('backend_ventas_api', '0001_initial'),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='Sale',\n            fields=[\n                ('id_sale', models.AutoField(primary_key=True, serialize=False)),\n                ('sale_date', models.DateField()),",
-        "detail": "backend_ventas_api.migrations.0002_sale_supplier_product_saledetail",
         "documentation": {}
     },
     {

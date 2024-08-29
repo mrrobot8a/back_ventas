@@ -7,3 +7,4 @@ from .supplier_model import Supplier
 from .product_model import Product
 from .sale_model import Sale
 from .sale_detail_model import SaleDetail
+ 
