@@ -1,0 +1,2 @@
+from .customer_serializer import CustomerSerializer
+from .document_type_serializer import DocumentTypeSerializer
