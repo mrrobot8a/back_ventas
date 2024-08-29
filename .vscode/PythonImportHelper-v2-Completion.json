@@ -577,7 +577,7 @@
         "kind": 6,
         "importPath": "backend_ventas_api.models.sale_detail_model",
         "description": "backend_ventas_api.models.sale_detail_model",
-        "peekOfCode": "class SaleDetail(models.Model):\n    id_sale = models.ForeignKey(get_sale_model(), on_delete=models.CASCADE, related_name='sale_details')\n    id_product = models.ForeignKey(get_product_model(), on_delete=models.CASCADE, related_name='product_details')\n    quantity = models.IntegerField()\n    class Meta:\n        unique_together = ('id_sale', 'id_product')  # Ensures that a product is only listed once per sale\n        constraints = [\n            models.UniqueConstraint(fields=['id_sale', 'id_product'], name='unique_product_sale')\n        ]\n        db_table = 'sale_details'",
+        "peekOfCode": "class SaleDetail(models.Model):\n    id_product = models.ForeignKey(get_product_model(), on_delete=models.CASCADE, related_name='sale_details')\n    quantity = models.IntegerField()\n    class Meta:\n        db_table = 'sale_details'\n    def __str__(self):\n        return f\"{self.id_product} ({self.quantity})\"",
         "detail": "backend_ventas_api.models.sale_detail_model",
         "documentation": {}
     },
@@ -586,7 +586,7 @@
         "kind": 2,
         "importPath": "backend_ventas_api.models.sale_detail_model",
         "description": "backend_ventas_api.models.sale_detail_model",
-        "peekOfCode": "def get_sale_model():\n    from .sale_model import Sale\n    return Sale\ndef get_product_model():\n    from .product_model import Product\n    return Product\nclass SaleDetail(models.Model):\n    id_sale = models.ForeignKey(get_sale_model(), on_delete=models.CASCADE, related_name='sale_details')\n    id_product = models.ForeignKey(get_product_model(), on_delete=models.CASCADE, related_name='product_details')\n    quantity = models.IntegerField()",
+        "peekOfCode": "def get_sale_model():\n    from .sale_model import Sale\n    return Sale\ndef get_product_model():\n    from .product_model import Product\n    return Product\nclass SaleDetail(models.Model):\n    id_product = models.ForeignKey(get_product_model(), on_delete=models.CASCADE, related_name='sale_details')\n    quantity = models.IntegerField()\n    class Meta:",
         "detail": "backend_ventas_api.models.sale_detail_model",
         "documentation": {}
     },
@@ -595,7 +595,7 @@
         "kind": 2,
         "importPath": "backend_ventas_api.models.sale_detail_model",
         "description": "backend_ventas_api.models.sale_detail_model",
-        "peekOfCode": "def get_product_model():\n    from .product_model import Product\n    return Product\nclass SaleDetail(models.Model):\n    id_sale = models.ForeignKey(get_sale_model(), on_delete=models.CASCADE, related_name='sale_details')\n    id_product = models.ForeignKey(get_product_model(), on_delete=models.CASCADE, related_name='product_details')\n    quantity = models.IntegerField()\n    class Meta:\n        unique_together = ('id_sale', 'id_product')  # Ensures that a product is only listed once per sale\n        constraints = [",
+        "peekOfCode": "def get_product_model():\n    from .product_model import Product\n    return Product\nclass SaleDetail(models.Model):\n    id_product = models.ForeignKey(get_product_model(), on_delete=models.CASCADE, related_name='sale_details')\n    quantity = models.IntegerField()\n    class Meta:\n        db_table = 'sale_details'\n    def __str__(self):\n        return f\"{self.id_product} ({self.quantity})\"",
         "detail": "backend_ventas_api.models.sale_detail_model",
         "documentation": {}
     },
@@ -604,7 +604,7 @@
         "kind": 6,
         "importPath": "backend_ventas_api.models.sale_model",
         "description": "backend_ventas_api.models.sale_model",
-        "peekOfCode": "class Sale(models.Model):\n    id_sale = models.AutoField(primary_key=True)\n    id_customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True, related_name='sales')\n    sale_date = models.DateField()\n    def __str__(self):\n        return f\"Sale {self.id_sale} by {self.id_customer}\"\n    class Meta:\n        db_table = 'sales'",
+        "peekOfCode": "class Sale(models.Model):\n    id_sale = models.AutoField(primary_key=True)\n    id_customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True, related_name='sales')\n    id_sale_detail = models.ForeignKey(SaleDetail, on_delete=models.CASCADE, related_name='sales_details')\n    total = models.DecimalField(max_digits=20, decimal_places=2, blank=True, null=True)  # Se puede calcular automáticamente\n    sale_date = models.DateField()\n    def __str__(self):\n        return f\"Sale {self.id_sale} by {self.id_customer}\"\n    def calculate_total(self):\n        total = sum(detail.quantity * detail.id_product.unit_price for detail in self.sales_details.all())",
         "detail": "backend_ventas_api.models.sale_model",
         "documentation": {}
     },
