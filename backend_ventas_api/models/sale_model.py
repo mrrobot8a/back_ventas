@@ -13,13 +13,13 @@ class Sale(models.Model):
         return f"Sale {self.id_sale} by {self.id_customer}"
 
     def calculate_total(self):
-        # Calcula el total para este único SaleDetail relacionado con la venta
+        
         total = self.id_sale_detail.quantity * self.id_sale_detail.id_product.unit_price
         return total
 
     def save(self, *args, **kwargs):
-        self.total = self.calculate_total()  # Calcula el total antes de guardar
-        super().save(*args, **kwargs)  # Llama al método save del padre
+        self.total = self.calculate_total() 
+        super().save(*args, **kwargs)  
 
     class Meta:
         db_table = 'sales'
