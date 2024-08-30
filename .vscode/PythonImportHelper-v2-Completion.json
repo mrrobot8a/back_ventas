@@ -114,6 +114,22 @@
         "documentation": {}
     },
     {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "models",
         "importPath": "django.db",
         "description": "django.db",
@@ -512,11 +528,20 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "backend_ventas_api.migrations.0002_alter_customer_user_id",
+        "description": "backend_ventas_api.migrations.0002_alter_customer_user_id",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('backend_ventas_api', '0001_initial'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='customer',\n            name='user_id',\n            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='customers', to='backend_ventas_api.user'),\n        ),",
+        "detail": "backend_ventas_api.migrations.0002_alter_customer_user_id",
+        "documentation": {}
+    },
+    {
         "label": "Customer",
         "kind": 6,
         "importPath": "backend_ventas_api.models.customer_model",
         "description": "backend_ventas_api.models.customer_model",
-        "peekOfCode": "class Customer(models.Model):\n    id = models.AutoField(primary_key=True)\n    user_id = models.IntegerField()\n    document = models.CharField(max_length=20)\n    document_type = models.ForeignKey(DocumentType, on_delete=models.CASCADE)  # Relación con DocumentType\n    first_name = models.CharField(max_length=50)\n    last_name = models.CharField(max_length=50)\n    address = models.CharField(max_length=100)\n    phone = models.CharField(max_length=20, blank=True, null=True)\n    date_of_birth = models.DateField(blank=True, null=True)",
+        "peekOfCode": "class Customer(models.Model):\n    id = models.AutoField(primary_key=True)\n    user_id = models.ForeignKey('User', on_delete=models.CASCADE, related_name='customers', blank=False, null=False)\n    document = models.CharField(max_length=20)\n    document_type = models.ForeignKey(DocumentType, on_delete=models.CASCADE)  # Relación con DocumentType\n    first_name = models.CharField(max_length=50)\n    last_name = models.CharField(max_length=50)\n    address = models.CharField(max_length=100)\n    phone = models.CharField(max_length=20, blank=True, null=True)\n    date_of_birth = models.DateField(blank=True, null=True)",
         "detail": "backend_ventas_api.models.customer_model",
         "documentation": {}
     },
@@ -552,25 +577,7 @@
         "kind": 6,
         "importPath": "backend_ventas_api.models.sale_detail_model",
         "description": "backend_ventas_api.models.sale_detail_model",
-        "peekOfCode": "class SaleDetail(models.Model):\n    id_product = models.ForeignKey(get_product_model(), on_delete=models.CASCADE, related_name='sale_details')\n    quantity = models.IntegerField()\n    class Meta:\n        db_table = 'sale_details'\n    def __str__(self):\n        return f\"{self.id_product} ({self.quantity})\"",
-        "detail": "backend_ventas_api.models.sale_detail_model",
-        "documentation": {}
-    },
-    {
-        "label": "get_sale_model",
-        "kind": 2,
-        "importPath": "backend_ventas_api.models.sale_detail_model",
-        "description": "backend_ventas_api.models.sale_detail_model",
-        "peekOfCode": "def get_sale_model():\n    from .sale_model import Sale\n    return Sale\ndef get_product_model():\n    from .product_model import Product\n    return Product\nclass SaleDetail(models.Model):\n    id_product = models.ForeignKey(get_product_model(), on_delete=models.CASCADE, related_name='sale_details')\n    quantity = models.IntegerField()\n    class Meta:",
-        "detail": "backend_ventas_api.models.sale_detail_model",
-        "documentation": {}
-    },
-    {
-        "label": "get_product_model",
-        "kind": 2,
-        "importPath": "backend_ventas_api.models.sale_detail_model",
-        "description": "backend_ventas_api.models.sale_detail_model",
-        "peekOfCode": "def get_product_model():\n    from .product_model import Product\n    return Product\nclass SaleDetail(models.Model):\n    id_product = models.ForeignKey(get_product_model(), on_delete=models.CASCADE, related_name='sale_details')\n    quantity = models.IntegerField()\n    class Meta:\n        db_table = 'sale_details'\n    def __str__(self):\n        return f\"{self.id_product} ({self.quantity})\"",
+        "peekOfCode": "class SaleDetail(models.Model):\n    id_sale_detail = models.AutoField(primary_key=True)\n    id_product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='sale_details')\n    quantity = models.IntegerField()\n    class Meta:\n        db_table = 'sale_details'\n    def __str__(self):\n        return f\"{self.id_product} ({self.quantity})\"\n    def save(self, *args, **kwargs):\n        # Descuenta del stock antes de guardar",
         "detail": "backend_ventas_api.models.sale_detail_model",
         "documentation": {}
     },

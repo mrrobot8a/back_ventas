@@ -4,7 +4,7 @@ from .document_type_model import DocumentType
 
 class Customer(models.Model):
     id = models.AutoField(primary_key=True)
-    user_id = models.IntegerField()
+    user_id = models.ForeignKey('User', on_delete=models.CASCADE, related_name='customers', blank=False, null=False)
     document = models.CharField(max_length=20)
     document_type = models.ForeignKey(DocumentType, on_delete=models.CASCADE)  # Relación con DocumentType
     first_name = models.CharField(max_length=50)

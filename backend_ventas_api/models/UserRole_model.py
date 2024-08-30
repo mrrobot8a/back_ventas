@@ -14,7 +14,7 @@ class UserRole(models.Model):
     role = models.ForeignKey(get_role_model(), on_delete=models.CASCADE, related_name='role_users')
 
     class Meta:
-        unique_together = ('user', 'role')  # Asegura que un usuario no tenga el mismo rol más de una vez
+        unique_together = ('user', 'role')  
         constraints = [
             models.UniqueConstraint(fields=['user', 'role'], name='unique_user_role')
         ]
