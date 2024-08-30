@@ -579,7 +579,7 @@
         "kind": 6,
         "importPath": "backend_ventas_api.models.sale_model",
         "description": "backend_ventas_api.models.sale_model",
-        "peekOfCode": "class Sale(models.Model):\n    id_sale = models.AutoField(primary_key=True)\n    id_customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True, related_name='sales')\n    id_sale_detail = models.ForeignKey(SaleDetail, on_delete=models.CASCADE, related_name='sales_details')\n    total = models.DecimalField(max_digits=20, decimal_places=2, blank=True, null=True)  # Se puede calcular automáticamente\n    sale_date = models.DateField()\n    def __str__(self):\n        return f\"Sale {self.id_sale} by {self.id_customer}\"\n    def calculate_total(self):\n        total = sum(detail.quantity * detail.id_product.unit_price for detail in self.sales_details.all())",
+        "peekOfCode": "class Sale(models.Model):\n    id_sale = models.AutoField(primary_key=True)\n    id_customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True, related_name='sales')\n    id_sale_detail = models.ForeignKey(SaleDetail, on_delete=models.CASCADE, related_name='sales_details')\n    total = models.DecimalField(max_digits=20, decimal_places=2, blank=True, null=True)  # Se puede calcular automáticamente\n    sale_date = models.DateField()\n    def __str__(self):\n        return f\"Sale {self.id_sale} by {self.id_customer}\"\n    def calculate_total(self):\n        # Calcula el total para este único SaleDetail relacionado con la venta",
         "detail": "backend_ventas_api.models.sale_model",
         "documentation": {}
     },
