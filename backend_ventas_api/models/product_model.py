@@ -1,5 +1,5 @@
 from django.db import models
-from .supplier_model import Supplier  # Adjust import based on the location of the Supplier model
+from .supplier_model import Supplier
 
 class Product(models.Model):
     id_product = models.AutoField(primary_key=True)
