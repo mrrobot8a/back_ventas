@@ -8,6 +8,8 @@ from backend_ventas_api.serializers.role_serializer import RoleSerializer
 from backend_ventas_api.serializers.supplier_serializer import SupplierSerializer
 from backend_ventas_api.serializers.product_serializer import ProductSerializer
 from backend_ventas_api.serializers.sale_serializer import SaleSerializer
+from backend_ventas_api.serializers.MyTokenObtainPairSerializer import MyTokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 class CustomerViewSet(viewsets.ModelViewSet):
     queryset = Customer.objects.all()
@@ -37,4 +39,8 @@ class SupplierViewSet(viewsets.ModelViewSet):
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer    
+    
 

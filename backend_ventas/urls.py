@@ -16,6 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from backend_ventas_api.views import MyTokenObtainPairView
+from rest_framework_simplejwt.views import TokenRefreshView
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,12 +32,15 @@ urlpatterns = [
     path('api_ventas/v1/', include('backend_ventas_api.urls')),
 ]
 
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-)
 
-urlpatterns += [
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+
+urlpatterns = [
+     path('admin/', admin.site.urls),
+    # This line in the URL configuration is including the URLs from another URL configuration file
+    # named `backend_ventas_api.urls` under the path `api_ventas/v1/`. This allows you to organize
+    # your URL patterns into separate files and include them in the main URL configuration. It helps
+    # in keeping the code modular and maintainable.
+    path('api_ventas/v1/', include('backend_ventas_api.urls')),
+    path('api/token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
