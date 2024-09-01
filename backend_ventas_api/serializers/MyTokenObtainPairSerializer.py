@@ -1,7 +1,5 @@
-# serializers.py
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from backend_ventas_api.models import User  # Importa tu modelo de usuario
-from rest_framework import serializers
+from backend_ventas_api.models import UserRole  # Importa la relación UserRole
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -17,7 +15,11 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
 
-        # Agrega la información del usuario a la respuesta
+        # Obtener roles del usuario
+        roles = UserRole.objects.filter(user=self.user).select_related('role')
+        roles_list = [role.role.name_rol for role in roles]
+
+        # Agrega la información del usuario y los roles a la respuesta
         data['user'] = {
             'id_usuario': self.user.id_usuario,
             'name_user': self.user.name_user,
@@ -26,6 +28,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
             'is_staff': self.user.is_staff,
             'is_superuser': self.user.is_superuser,
             'is_active': self.user.is_active,
+            'roles': roles_list,  # Aquí se agregan los roles
         }
 
         return data

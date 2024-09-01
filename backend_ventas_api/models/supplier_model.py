@@ -4,7 +4,7 @@ from .user_model import User
 class Supplier(models.Model):
     id_supplier = models.AutoField(primary_key=True)
     id_user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='suppliers')
-    nit = models.CharField(max_length=20)
+    nit = models.CharField(max_length=20,unique=True)
     name = models.CharField(max_length=50)
     city = models.CharField(max_length=50)
     email = models.EmailField(max_length=50)

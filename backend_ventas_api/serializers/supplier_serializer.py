@@ -5,6 +5,6 @@ class SupplierSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Supplier
-        fields = ['name', 'nit', 'city', 'email',
+        fields = ['id_supplier','name', 'nit', 'city', 'email',
                     'contact_number',
                     'created_at', 'updated_at']

@@ -10,11 +10,11 @@ from backend_ventas_api.serializers.product_serializer import ProductSerializer
 from backend_ventas_api.serializers.sale_serializer import SaleSerializer
 from backend_ventas_api.serializers.MyTokenObtainPairSerializer import MyTokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
-
+from rest_framework.permissions import IsAuthenticated
 class CustomerViewSet(viewsets.ModelViewSet):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
-
+    # permission_classes = [IsAuthenticated]
 class DocumentTypeViewSet(viewsets.ModelViewSet):
     queryset = DocumentType.objects.all()
     serializer_class = DocumentTypeSerializer

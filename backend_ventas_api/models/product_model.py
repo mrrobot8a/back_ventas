@@ -16,3 +16,4 @@ class Product(models.Model):
 
     class Meta:
         db_table = 'products'
+        unique_together = ('name', 'id_supplier')
